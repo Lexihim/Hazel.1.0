@@ -8,7 +8,8 @@ app.use(cors()); // Allows your GitHub site to talk to this server
 app.use(express.json());
 
 // API Configuration
-const HAZEL_KEY = process.env.HAZEL_API_KEY; 
+const HAZEL_KEY =7bf09ef8981651a25a6214c25ea083a1e95f69a5
+PORT=3000 
 
 app.post('/api/chat', async (req, res) => {
     try {
