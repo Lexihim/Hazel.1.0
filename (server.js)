@@ -1,0 +1,26 @@
+const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
+require('dotenv').config();
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// This pulls the key from a hidden .env file
+const API_KEY = process.env.HAZEL_KEY;
+
+app.post('/chat', async (req, res) => {
+    try {
+        const response = await axios.post('https://api.example.com/v1/chat', {
+            prompt: req.body.prompt
+        }, {
+            headers: { 'Authorization': `Bearer ${API_KEY}` }
+        });
+        res.json({ reply: response.data.output });
+    } catch (err) {
+        res.status(500).json({ error: "Hazel is offline." });
+    }
+});
+
+app.listen(3000, () => console.log("Hazel Backend Active"));
